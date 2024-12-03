@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Batterij Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        .parameter {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input[type="range"] {
+            width: 100%;
+        }
+
+        .koh-button, .material-button, .kool-button, .elektroliet-button{
+            margin-right: 10px;
+            padding: 5px 10px;
+            background-color: white;
+            border: 2px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            color: black;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .material-button.active, .koh-button.active, .kool-button.active, .elektroliet-button.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        .material-button:hover, .koh-button:hover, .kool-button:hover, .elektroliet-button:hover {
+            background-color: #f0f0f0;
+        }
+
+        .info-button {
+            margin-left: 10px;
+            background: #ffc107;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 25px;
+            height: 25px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .result {
+            text-align: center;
+            font-size: 18px;
+            padding: 10px;
+            background: #e9f7e9;
+            border-radius: 5px;
+        }
+
+        .result h2 {
+            margin-top: 0;
+        }
+
+        .popup {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;    
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .popup-content {
+            position: relative;
+            background: #ffc107;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px #fdfcfc;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        .close-button {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+            font-weight: bold;
+            color: #fdfcfc;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Batterij Stroom Calculator</h1>
+
+        <div class="parameter">
+            <label for="area">Oppervlakte (cm²):<span id="areaValue">5</span> cm²</label>
+            <input type="range" id="area" min="1" max="10" step=".1" value="5" oninput="updateValue('area', this.value)">
+            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+        </div>
+
+        <div class="parameter">
+            <label for="dikte">Dikte (cm):<span id="dikteValue">2</span> cm</label>
+            <input type="range" id="dikte" min="1" max="3" step=".1" value="2" oninput="updateValue('dikte', this.value)">
+            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+        </div>
+
+        <div class="parameter">
+            <label for="kathode_anode_factor">Keuze voor anode en kathode:</label>
+            <div class="material-buttons">
+                <button class="material-button" data-material="Koper- en zinkplaatjes" onclick="set_anode_Material('Koper- en zinkplaatjes', this)">Koper- en zinkplaatjes</button>
+                <button class="material-button" data-material="Weerstanddraadjes" onclick="set_anode_Material('Weerstanddraadjes', this)">Weerstanddraadjes</button>
+            </div>
+            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+        </div>
+
+        <div class="parameter">
+            <label>KOH toevoegen aan de elektroden:</label>
+            <div class="koh-buttons">
+                <button class="koh-button" data-material="Ja" onclick="set_KOH('Ja', this)">Ja</button>
+                <button class="koh-button" data-material="Nee" onclick="set_KOH('Nee', this)">Nee</button>
+            </div>
+            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+        </div>
+
+        <div class="parameter">
+            <label for="koolstof">Welk soort koolstof:</label>
+            <div class="kool-buttons">
+                <button class="kool-button" data-material="Grafiet" onclick="set_koolstof('Grafiet', this)">Grafiet</button>
+                <button class="kool-button" data-material="Geactiveerde Kool" onclick="set_koolstof('Geactiveerde Kool', this)">Geactiveerde Kool</button>
+            </div>
+            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+        </div>
+
+        <div class="parameter">
+            <label for="elektroliet">Welk soort materiaal om elektroliet op te vangen?:</label>
+            <div class="elektroliet-buttons">
+                <button class="elektroliet-button" data-material="Papier" onclick="set_elektroliet('Papier', this)">Papier</button>
+                <button class="elektroliet-button" data-material="Sponsje" onclick="set_elektroliet('Sponsje', this)">Sponsje</button>
+                <button class="elektroliet-button" data-material="Watje" onclick="set_elektroliet('Watje', this)">Watje</button>
+            </div>
+            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+        </div>
+
+        <div class="result">
+            <h2>Bereken Resultaat</h2>
+            <p>Stroomsterkte (I) bij 220 Ω: <span id="currentResult">0.5</span> mA</p>
+            <p>Openklemspanning (V):<span id="voltageResult">1.37</span> V</p></p>
+            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+        </div>
+    </div>
+    <div id="popup" class="popup hidden">
+        <div class="popup-content">
+            <span class="close-button" onclick="closePopup()">×</span>
+            <h2>Informatie</h2>
+            <p id="popup-text">Dit is een voorbeeld van een nette pop-up.</p>
+        </div>
+    </div>
+    <script>
+        
+        let kathode_anode_factor = 1; // Default material
+        let area = 5;
+        let dikte = 2;
+        let KOH_factor = 1;
+        let KOH_factor_volt = 0
+        let kool_factoer = 1;
+        let elektroliet_factor = 1;
+        let schaalfactor = 1/3.228; // Dit is een factor die het add on effect dempt
+
+        // Update slider values in real-time
+        function updateValue(parameter, value) {
+            document.getElementById(`${parameter}Value`).innerText = value;
+            if(parameter === "area") area = parseFloat(value);
+            if(parameter === "dikte") dikte = parseFloat(value);
+            calculateCurrent();
+            calculateVoltage();
+        }
+
+
+        // Stel het materiaal in en werk de knoppen bij
+        function set_anode_Material(selectedMaterial, button) {
+            material = selectedMaterial;
+            if (material === "Koper- en zinkplaatjes") kathode_anode_factor = 1.18;
+            if (material === "Weerstanddraadjes") kathode_anode_factor = 1.07;
+            // Verwijder de 'active'-klasse van alle knoppen
+            const allButtons = document.querySelectorAll(".material-button");
+            allButtons.forEach(btn => btn.classList.remove("active"));
+
+            // Voeg de 'active'-klasse toe aan de geselecteerde knop
+            button.classList.add("active");
+
+            // Eventueel: voer andere acties uit, zoals berekeningen
+            calculateVoltage();
+            calculateCurrent();
+        }
+
+        function set_KOH(selectedMaterial, button) {
+            if (selectedMaterial === "Ja") KOH_factor_volt = .2, KOH_factor = 3;
+            if (selectedMaterial === "Nee") KOH_factor_volt= 0, KOH_factor = 1;
+            // Verwijder de 'active'-klasse van alle knoppen
+            const allButtons = document.querySelectorAll(".koh-button");
+            allButtons.forEach(btn => btn.classList.remove("active"));
+
+            // Voeg de 'active'-klasse toe aan de geselecteerde knop
+            button.classList.add("active");
+
+
+            // Eventueel: voer andere acties uit, zoals berekeningen
+            calculateVoltage();
+            calculateCurrent();
+        }
+
+        function set_koolstof(selectedMaterial, button) {
+            if (selectedMaterial === "Grafiet") kool_factoer = 1;
+            if (selectedMaterial === "Geactiveerde Kool") kool_factoer= 1.495;
+            // Verwijder de 'active'-klasse van alle knoppen
+            const allButtons = document.querySelectorAll(".kool-button");
+            allButtons.forEach(btn => btn.classList.remove("active"));
+
+            // Voeg de 'active'-klasse toe aan de geselecteerde knop
+            button.classList.add("active");
+
+
+            // Eventueel: voer andere acties uit, zoals berekeningen
+            calculateVoltage();
+            calculateCurrent();
+        }
+
+        function set_elektroliet(selectedMaterial, button) {
+            if (selectedMaterial === "Papier") elektroliet_factor = 0;
+            if (selectedMaterial === "Sponsje") elektroliet_factor= 1;
+            if (selectedMaterial === "Watje") elektroliet_factor= 2.57;
+            // Verwijder de 'active'-klasse van alle knoppen
+            const allButtons = document.querySelectorAll(".elektroliet-button");
+            allButtons.forEach(btn => btn.classList.remove("active"));
+
+            // Voeg de 'active'-klasse toe aan de geselecteerde knop
+            button.classList.add("active");
+
+
+            // Eventueel: voer andere acties uit, zoals berekeningen
+            calculateVoltage();
+            calculateCurrent();
+        }
+
+        function calculateVoltage(){
+            let voltage = kathode_anode_factor + KOH_factor_volt; // I = V / R
+            document.getElementById("voltageResult").innerText = voltage.toFixed(2);
+        }
+
+        // Bereken stroomsterkte met de formule I = V / R
+        function calculateCurrent() {
+            let current = 1.03 * (1 - (1 - .776) * (dikte - 1)) * (1 + .18333 * (area - 1)) * kool_factoer * KOH_factor * elektroliet_factor * schaalfactor; // I = V / R
+            document.getElementById("currentResult").innerText = current.toFixed(2);
+        }
+
+        // Open de pop-up met specifieke tekst
+        function showPopup(message) {
+            const popup = document.getElementById("popup");
+            const popupText = document.getElementById("popup-text");
+
+            // Stel de boodschap in
+            popupText.innerText = message;
+
+            // Toon de pop-up
+            popup.classList.remove("hidden");
+        }
+
+        // Sluit de pop-up
+        function closePopup() {
+            const popup = document.getElementById("popup");
+            popup.classList.add("hidden");
+        }
+
+
+        // Initial berekening
+        calculateCurrent();
+        calculateVoltage();
+    </script>
+</body>
+</html>
+       
+        
