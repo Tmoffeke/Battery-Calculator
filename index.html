@@ -130,13 +130,15 @@
         <div class="parameter">
             <label for="area">Oppervlakte (cm²):<span id="areaValue">5</span> cm²</label>
             <input type="range" id="area" min="1" max="10" step=".1" value="5" oninput="updateValue('area', this.value)">
-            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+            <button class="info-button" onclick="showPopup('Een groter oppervalk zorgt voor een grotere hoeveelheid stroom doordat er een groter hoeveelheid elektroliet aanwezig is in de grotere doorsnede. Onze experimenten toonden echter aan dat als je de oppervlakte met een bepaalde factor vergroot, de stroomsterkte niet met diezelfde factor toeneemt, 
+                                                           maar dat deze toename wat gedempt is. Het is dus ideaal om een zo'n klein mogelijke oppervlakte te gebruiken per cel en dan meerdere cellen te gebruiken. Het probleem is dat het maken van kleine batterijen veel meer tijd kost dan het maken van 1 grote met een equivalente oppervlakte.  In onze Chem-E-Car gebruikten we daaarom batterijen met een oppervlakte van 4 cm², dit was voor ons de beste
+                afweging tussen productietijd en batterijefficiëntie.')">i</button>
         </div>
 
         <div class="parameter">
-            <label for="dikte">Dikte (cm):<span id="dikteValue">2</span> cm</label>
+            <label for="dikte">Dikte (mm):<span id="dikteValue">2</span> mm</label>
             <input type="range" id="dikte" min="1" max="3" step=".1" value="2" oninput="updateValue('dikte', this.value)">
-            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+            <button class="info-button" onclick="showPopup('Onze experimenten tonen aan dat de stroomsterkte toeneemt als we de batterij dunnern maken. Dit komt omdat de inwednige weerstand van de batterij dan afneemt. De elektronenen moeten minder ver door het medium en zullen dus minder hinder ondervinden onderweg, waardoor de stroomsterkte toeneemt. Wij gebruiken een dikte van 1 mm.')">i</button>
         </div>
 
         <div class="parameter">
@@ -145,7 +147,7 @@
                 <button class="material-button" data-material="Koper- en zinkplaatjes" onclick="set_anode_Material('Koper- en zinkplaatjes', this)">Koper- en zinkplaatjes</button>
                 <button class="material-button" data-material="Weerstanddraadjes" onclick="set_anode_Material('Weerstanddraadjes', this)">Weerstanddraadjes</button>
             </div>
-            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+            <button class="info-button" onclick="showPopup('Hier weet ik nog geen verklaring voor. Misschien iets over dat het bijdraagt aan het potentiaal')">i</button>
         </div>
 
         <div class="parameter">
@@ -154,7 +156,7 @@
                 <button class="koh-button" data-material="Ja" onclick="set_KOH('Ja', this)">Ja</button>
                 <button class="koh-button" data-material="Nee" onclick="set_KOH('Nee', this)">Nee</button>
             </div>
-            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+            <button class="info-button" onclick="showPopup('Het toevoegen van een elektroliet als KOH aan de elektroden zorgt ervoor dat de elektronenn zich makkelijker door de elektroden-poeders kunnen verplaatsten, waardoor de stroomsterkte enorm toeneemt. Ook bevordert dit de openklemspanning.')">i</button>
         </div>
 
         <div class="parameter">
@@ -173,14 +175,14 @@
                 <button class="elektroliet-button" data-material="Sponsje" onclick="set_elektroliet('Sponsje', this)">Sponsje</button>
                 <button class="elektroliet-button" data-material="Watje" onclick="set_elektroliet('Watje', this)">Watje</button>
             </div>
-            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+            <button class="info-button" onclick="showPopup('Voor het plaatsten van ons elektroliet in de droogcel hebben we een bepaald materiaal nodig dat dit elektroliet absorbeert en de elektronen m.b.v. dit elektroliet doorlaat. We hebben verschillende materialen getest en stelden vas dat papier niks van elektronen doorlaat. Een sponsje daarentegen wel. Het beste materiaal is een katoenen watje.')">i</button>
         </div>
 
         <div class="result">
-            <h2>Bereken Resultaat</h2>
+            <h2>Eigenschappen van jouw batterij</h2>
             <p>Stroomsterkte (I) bij 220 Ω: <span id="currentResult">0.5</span> mA</p>
             <p>Openklemspanning (V):<span id="voltageResult">1.37</span> V</p></p>
-            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+            <button class="info-button" onclick="showPopup('Deze waarden zijn een benadering op basis van de parameters die je hebt ingevuld. In werkelijkheid zullen de waarden (vooral de stroomsterkte) iets afwijken doordat de verschillende effecten elkaar beïnvloeden. We kunnen dus niet gewoon alle effecten combineren. ')">i</button>
         </div>
     </div>
     <div id="popup" class="popup hidden">
