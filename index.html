@@ -40,7 +40,7 @@
             width: 100%;
         }
 
-        .koh-button, .material-button, .kool-button, .elektroliet-button{
+        .koh-button, .material-button, .kool-button, .elektroliet-button, .nacl-button{
             margin-right: 10px;
             padding: 5px 10px;
             background-color: white;
@@ -51,13 +51,13 @@
             transition: background-color 0.3s, color 0.3s;
         }
 
-        .material-button.active, .koh-button.active, .kool-button.active, .elektroliet-button.active {
+        .material-button.active, .koh-button.active, .kool-button.active, .elektroliet-button.active, .nacl-button.active {
             background-color: #007bff;
             color: white;
             border-color: #007bff;
         }
 
-        .material-button:hover, .koh-button:hover, .kool-button:hover, .elektroliet-button:hover {
+        .material-button:hover, .koh-button:hover, .kool-button:hover, .elektroliet-button:hover, .nacl-button:hover {
             background-color: #f0f0f0;
         }
 
@@ -149,6 +149,15 @@
         </div>
 
         <div class="parameter">
+            <label>NaCl (keukenzout) toevoegen aan de elektrolietoplossing:</label>
+            <div class="nacl-buttons">
+                <button class="nacl-button" data-material="Ja" onclick="set_NACL('Ja', this)">Ja</button>
+                <button class="nacl-button" data-material="Nee" onclick="set_NACL('Nee', this)">Nee</button>
+            </div>
+            <button class="info-button" onclick="showPopup('Het toevoegen van een zout als NaCl aan de elektrolietoplossing, zorgt ervoor dat er meer ionen in het elektroliet tereecht komen. Hierdoor zullen er meer ladingen in de oplossing komen wat de stroomsterkte bevordert. De elektrolietenoplossing van NaCl en KOH laat heropladen tevens ook nog steeds toe.')">i</button>
+        </div>
+
+        <div class="parameter">
             <label>KOH toevoegen aan de elektroden:</label>
             <div class="koh-buttons">
                 <button class="koh-button" data-material="Ja" onclick="set_KOH('Ja', this)">Ja</button>
@@ -192,14 +201,15 @@
     </div>
     <script>
         
-        let kathode_anode_factor = 1; // Default material
+        let kathode_anode_factor = 1; // Default factors
         let area = 5;
         let dikte = 2;
         let KOH_factor = 1;
         let KOH_factor_volt = 0
         let kool_factoer = 1;
         let elektroliet_factor = 1;
-        let schaalfactor = 1/3.228; // Dit is een factor die het add on effect dempt
+        let nacl_factor = 1
+        let schaalfactor = 1/3.228/1.15; // Dit is een factor die het add on effect dempt
 
         // Update slider values in real-time
         function updateValue(parameter, value) {
@@ -243,7 +253,21 @@
             calculateVoltage();
             calculateCurrent();
         }
+        function set_NaCl(selectedMaterial, button) {
+            if (selectedMaterial === "Ja") nacl_factor = 1.15;
+            if (selectedMaterial === "Nee") nacl_factor = 1;
+            // Verwijder de 'active'-klasse van alle knoppen
+            const allButtons = document.querySelectorAll(".nacl-button");
+            allButtons.forEach(btn => btn.classList.remove("active"));
 
+            // Voeg de 'active'-klasse toe aan de geselecteerde knop
+            button.classList.add("active");
+
+
+            // Eventueel: voer andere acties uit, zoals berekeningen
+            calculateVoltage();
+            calculateCurrent();
+        }
         function set_koolstof(selectedMaterial, button) {
             if (selectedMaterial === "Grafiet") kool_factoer = 1;
             if (selectedMaterial === "Geactiveerde Kool") kool_factoer= 1.495;
@@ -284,7 +308,7 @@
 
         // Bereken stroomsterkte met de formule I = V / R
         function calculateCurrent() {
-            let current = 1.03 * (1 - (1 - .776) * (dikte - 1)) * (1 + .18333 * (area - 1)) * kool_factoer * KOH_factor * elektroliet_factor * schaalfactor; // I = V / R
+            let current = 1.03 * (1 - (1 - .776) * (dikte - 1)) * (1 + .18333 * (area - 1))* nacl_factor * kool_factoer * KOH_factor * elektroliet_factor * schaalfactor; // I = V / R
             document.getElementById("currentResult").innerText = current.toFixed(2);
         }
 
