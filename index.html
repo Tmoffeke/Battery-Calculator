@@ -151,8 +151,8 @@
         <div class="parameter">
             <label>NaCl (keukenzout) toevoegen aan de elektrolietoplossing:</label>
             <div class="nacl-buttons">
-                <button class="nacl-button" data-material="Ja" onclick="set_NACL('Ja', this)">Ja</button>
-                <button class="nacl-button" data-material="Nee" onclick="set_NACL('Nee', this)">Nee</button>
+                <button class="nacl-button" data-material="Ja" onclick="set_nacl('Ja', this)">Ja</button>
+                <button class="nacl-button" data-material="Nee" onclick="set_nacl('Nee', this)">Nee</button>
             </div>
             <button class="info-button" onclick="showPopup('Het toevoegen van een zout als NaCl aan de elektrolietoplossing, zorgt ervoor dat er meer ionen in het elektroliet tereecht komen. Hierdoor zullen er meer ladingen in de oplossing komen wat de stroomsterkte bevordert. De elektrolietenoplossing van NaCl en KOH laat heropladen tevens ook nog steeds toe.')">i</button>
         </div>
@@ -253,7 +253,7 @@
             calculateVoltage();
             calculateCurrent();
         }
-        function set_NaCl(selectedMaterial, button) {
+        function set_nacl(selectedMaterial, button) {
             if (selectedMaterial === "Ja") nacl_factor = 1.15;
             if (selectedMaterial === "Nee") nacl_factor = 1;
             // Verwijder de 'active'-klasse van alle knoppen
