@@ -192,7 +192,7 @@
     </div>
     <script>
         
-        let kathode_anode_factor = 1.18; // Default factors
+        let kathode_anode_factor = 1; // Default factors
         let area = 5;
         let dikte = 2;
         let KOH_factor = 1;
@@ -276,7 +276,7 @@
         }
 
         function calculateVoltage(){
-            let voltage = kathode_anode_factor + KOH_factor_volt; // I = V / R
+            let voltage = 1.18 + KOH_factor_volt; // I = V / R
             document.getElementById("voltageResult").innerText = voltage.toFixed(2);
         }
 
