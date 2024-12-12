@@ -140,15 +140,6 @@
         </div>
 
         <div class="parameter">
-            <label for="kathode_anode_factor">Keuze voor anode en kathode:</label>
-            <div class="material-buttons">
-                <button class="material-button" data-material="Koper- en zinkplaatjes" onclick="set_anode_Material('Koper- en zinkplaatjes', this)">Koper- en zinkplaatjes</button>
-                <button class="material-button" data-material="Weerstanddraadjes" onclick="set_anode_Material('Weerstanddraadjes', this)">Weerstanddraadjes</button>
-            </div>
-            <button class="info-button" onclick="showPopup('Hier weet ik nog geen verklaring voor. Misschien iets over dat het bijdraagt aan het potentiaal')">i</button>
-        </div>
-
-        <div class="parameter">
             <label>NaCl (keukenzout) toevoegen aan de elektrolietoplossing:</label>
             <div class="nacl-buttons">
                 <button class="nacl-button" data-material="Ja" onclick="set_nacl('Ja', this)">Ja</button>
@@ -220,23 +211,6 @@
             calculateVoltage();
         }
 
-
-        // Stel het materiaal in en werk de knoppen bij
-        function set_anode_Material(selectedMaterial, button) {
-            material = selectedMaterial;
-            if (material === "Koper- en zinkplaatjes") kathode_anode_factor = 1.18;
-            if (material === "Weerstanddraadjes") kathode_anode_factor = 1.07;
-            // Verwijder de 'active'-klasse van alle knoppen
-            const allButtons = document.querySelectorAll(".material-button");
-            allButtons.forEach(btn => btn.classList.remove("active"));
-
-            // Voeg de 'active'-klasse toe aan de geselecteerde knop
-            button.classList.add("active");
-
-            // Eventueel: voer andere acties uit, zoals berekeningen
-            calculateVoltage();
-            calculateCurrent();
-        }
 
         function set_KOH(selectedMaterial, button) {
             if (selectedMaterial === "Ja") KOH_factor_volt = .2, KOH_factor = 3;
