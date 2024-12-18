@@ -128,13 +128,13 @@
         <h1>Batterij Stroom Calculator</h1>
 
         <div class="parameter">
-            <label for="area">Oppervlakte :<span id="areaValue">5</span> cm²</label>
+            <label for="area">Oppervlakte :<span id="areaValue"> 5</span> cm²</label>
             <input type="range" id="area" min="1" max="10" step=".1" value="5" oninput="updateValue('area', this.value)">
             <button class="info-button" onclick="showPopup('Een groter oppervlak zorgt voor een grotere hoeveelheid stroom doordat er een groter hoeveelheid elektroliet aanwezig is in de grotere doorsnede. Onze experimenten toonden echter aan dat als je de oppervlakte met een bepaalde factor vergroot, de stroomsterkte niet met diezelfde factor toeneemt, maar dat deze toename wat gedempt is. Het is dus ideaal om een zo een klein mogelijke oppervlakte te gebruiken per cel en dan meerdere cellen te gebruiken, het maken van kleine batterijen kost echter veel meer tijd dan het maken van 1 grote met een equivalente oppervlakte,  In onze Chem-E-Car gebruikten we daaarom batterijen met een oppervlakte van vier cm², dit was voor ons de beste afweging tussen productietijd en batterijefficiëntie.')">i</button>
         </div>
 
         <div class="parameter">
-            <label for="dikte">Dikte van de elektroden:<span id="dikteValue">2</span> mm</label>
+            <label for="dikte">Dikte van de elektroden :<span id="dikteValue"> 2</span> mm</label>
             <input type="range" id="dikte" min="1" max="3" step=".1" value="2" oninput="updateValue('dikte', this.value)">
             <button class="info-button" onclick="showPopup('Onze experimenten tonen aan dat de stroomsterkte toeneemt als we de elektroden dunner maken. Dit komt omdat de inwendige weerstand van de batterij dan afneemt. De reductie en oxidatie spelen zich af op het contactoppervlak tussen de elektrodenpasta en de elektrolyt. Door de elektroden dikker te maken, vergroot dit contactoppervlak niet  en neemt de reactiviteit dus niet toe. De ladingen zullen enkel langer moeten reizen totdat ze bij de plaatjes aankomen als we de elektrode verdikken. Je kan de analogie maken met de weerstand van een draad.  Wij gebruiken een dikte van 1 mm.')">i</button>
         </div>
