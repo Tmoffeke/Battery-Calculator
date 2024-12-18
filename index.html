@@ -128,15 +128,15 @@
         <h1>Batterij Stroom Calculator</h1>
 
         <div class="parameter">
-            <label for="area">Oppervlakte (cm²):<span id="areaValue">5</span> cm²</label>
+            <label for="area">Oppervlakte :<span id="areaValue">5</span> cm²</label>
             <input type="range" id="area" min="1" max="10" step=".1" value="5" oninput="updateValue('area', this.value)">
             <button class="info-button" onclick="showPopup('Een groter oppervlak zorgt voor een grotere hoeveelheid stroom doordat er een groter hoeveelheid elektroliet aanwezig is in de grotere doorsnede. Onze experimenten toonden echter aan dat als je de oppervlakte met een bepaalde factor vergroot, de stroomsterkte niet met diezelfde factor toeneemt, maar dat deze toename wat gedempt is. Het is dus ideaal om een zo een klein mogelijke oppervlakte te gebruiken per cel en dan meerdere cellen te gebruiken, het maken van kleine batterijen kost echter veel meer tijd dan het maken van 1 grote met een equivalente oppervlakte,  In onze Chem-E-Car gebruikten we daaarom batterijen met een oppervlakte van vier cm², dit was voor ons de beste afweging tussen productietijd en batterijefficiëntie.')">i</button>
         </div>
 
         <div class="parameter">
-            <label for="dikte">Dikte (mm):<span id="dikteValue">2</span> mm</label>
+            <label for="dikte">Dikte van de elektroden:<span id="dikteValue">2</span> mm</label>
             <input type="range" id="dikte" min="1" max="3" step=".1" value="2" oninput="updateValue('dikte', this.value)">
-            <button class="info-button" onclick="showPopup('Onze experimenten tonen aan dat de stroomsterkte toeneemt als we de batterij dunnern maken. Dit komt omdat de inwednige weerstand van de batterij dan afneemt. De elektronenen moeten minder ver door het medium en zullen dus minder hinder ondervinden onderweg, waardoor de stroomsterkte toeneemt. Wij gebruiken een dikte van 1 mm.')">i</button>
+            <button class="info-button" onclick="showPopup('Onze experimenten tonen aan dat de stroomsterkte toeneemt als we de elektroden dunner maken. Dit komt omdat de inwendige weerstand van de batterij dan afneemt. De reductie en oxidatie spelen zich af op het contactoppervlak tussen de elektrodenpasta en de elektrolyt. Door de elektroden dikker te maken, vergroot dit contactoppervlak niet  en neemt de reactiviteit dus niet toe. De ladingen zullen enkel langer moeten reizen totdat ze bij de plaatjes aankomen als we de elektrode verdikken. Je kan de analogie maken met de weerstand van een draad.  Wij gebruiken een dikte van 1 mm.')">i</button>
         </div>
 
         <div class="parameter">
@@ -145,7 +145,7 @@
                 <button class="nacl-button" data-material="Ja" onclick="set_nacl('Ja', this)">Ja</button>
                 <button class="nacl-button" data-material="Nee" onclick="set_nacl('Nee', this)">Nee</button>
             </div>
-            <button class="info-button" onclick="showPopup('Het toevoegen van een zout als NaCl aan de elektrolietoplossing, zorgt ervoor dat er meer ionen in het elektroliet tereecht komen. Hierdoor zullen er meer ladingen in de oplossing komen wat de stroomsterkte bevordert. De elektrolietenoplossing van NaCl en KOH laat heropladen tevens ook nog steeds toe.')">i</button>
+            <button class="info-button" onclick="showPopup('Een manier om de stroom die kan geleverd worden door de batterij te verhogen is door de snelheid van de reactie te verhogen. Dit kunnen we doen door de ionendichtheid van de elektrolyt te verhogen doormiddel van het toevoegen van NaCl.  De elektrolietenoplossing van NaCl en KOH laat heropladen tevens ook nog steeds toe!')">i</button>
         </div>
 
         <div class="parameter">
@@ -154,16 +154,16 @@
                 <button class="koh-button" data-material="Ja" onclick="set_KOH('Ja', this)">Ja</button>
                 <button class="koh-button" data-material="Nee" onclick="set_KOH('Nee', this)">Nee</button>
             </div>
-            <button class="info-button" onclick="showPopup('Het toevoegen van een elektroliet als KOH aan de elektroden zorgt ervoor dat de elektronenn zich makkelijker door de elektroden-poeders kunnen verplaatsten, waardoor de stroomsterkte enorm toeneemt. Ook bevordert dit de openklemspanning.')">i</button>
+            <button class="info-button" onclick="showPopup('KOH is essentieel voor de werking van de batterij omdat het de rol van elektrolyt opneemt. KOH zal in water splitsen in zijn ionen: K+ en OH-. De OH- ionen zullen gebruikt worden in de reactie waar zink geoxideerd wordt. Aan de kathode zal CuO gereduceerd worden, waarbij er OH- ionen vrijkomen. Zo zullen we na een tijdje een opbouw van negatieve ladingen krijgen aan de kathode (positieve pool). Door de opbouw van negatieve ladingen zullen de elektronen zich niet meer willen begeven naar de kathode en de stroom van elektronen zal stoppen. De K+ ionen zullen op dat moment naar de kathode bewegen zodat ze de negatieve lading kunnen stabiliseren.  Het is een tweeluik: de OH- ionen zijn belangrijk voor de reactie en de K+ ionen zorgen ervoor dat de stroom van elektronen niet stilvalt. Het is daarom uiterst belangrijk om optimaal contact te hebben tussen het elektrolyt en de elektroden en een manier om dit te verzekeren is door wat elektrolyt aan elektrodemengsels toe te voegen. KOH toevoegen elektroden zal dus altijd zorgen voor een hogere stroom! ')">i</button>
         </div>
 
         <div class="parameter">
-            <label for="koolstof">Welk soort koolstof?</label>
+            <label for="koolstof">Welk soort koolstof in de elektrode?</label>
             <div class="kool-buttons">
                 <button class="kool-button" data-material="Grafiet" onclick="set_koolstof('Grafiet', this)">Grafiet</button>
                 <button class="kool-button" data-material="Geactiveerde Kool" onclick="set_koolstof('Geactiveerde Kool', this)">Geactiveerde Kool</button>
             </div>
-            <button class="info-button" onclick="showPopup('De weerstand doet dit en dat')">i</button>
+            <button class="info-button" onclick="showPopup('Grafiet vervangen door geactiveerd koolstof zal ook de stroom dat de batterij kan leveren verhogen. Dit komt omdat geactiveerde koolstof meer absorberend is dan grafiet en bijgevolg dus beter gemixt kan worden in het mengsel van de kathode. De functie van de koolstof is de kathode goed geleid baar te maken. De actieve kool heeft dus meer contact met de andere deeltjes en zal zo de geleidbaarheid dan verhogen!')">i</button>
         </div>
 
         <div class="parameter">
@@ -173,7 +173,7 @@
                 <button class="elektroliet-button" data-material="Sponsje" onclick="set_elektroliet('Sponsje', this)">Sponsje</button>
                 <button class="elektroliet-button" data-material="Watje" onclick="set_elektroliet('Watje', this)">Watje</button>
             </div>
-            <button class="info-button" onclick="showPopup('Voor het plaatsten van ons elektroliet in de droogcel hebben we een bepaald materiaal nodig dat dit elektroliet absorbeert en de elektronen m.b.v. dit elektroliet doorlaat. We hebben verschillende materialen getest en stelden vas dat papier niks van elektronen doorlaat. Een sponsje daarentegen wel. Het beste materiaal is een katoenen watje.')">i</button>
+            <button class="info-button" onclick="showPopup('Van alle materialen dat je kon kiezen voor het materiaal van de elektrolyt zal een watje het best werken! De functie van dit materiaal is om de elektrolyt te absorberen zodat de ionen gemakkelijk naar de elektroden kunnen worden afgevoerd. Een papieren doekje kan van al deze materialen het minst elektrolyt absorberen. Door zijn slecht absorbeervermogen zal een batterij met papier zelfs volledig geen stroom produceren!  Het sponsje is al iets beter, maar het watje steekt er werkelijk bovenuit en kan het meest elektrolyt absorberen.  ')">i</button>
         </div>
 
         <div class="result">
